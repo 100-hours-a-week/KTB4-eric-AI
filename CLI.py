@@ -1,3 +1,5 @@
+import asyncio
+
 destinations = {
     "일본" : 300000,
     "중국" : 500000,
@@ -44,7 +46,16 @@ def show_seats():
 
         print(f"{seat["number"]}번 좌석, 등급 : {seat["grade"]}, 추가금 : {seat["extra_price"]}원, {status}")
 
-def select_seat():
+async def check_seats(seat):
+    print("\n좌석 확인 중입니다")
+    await asyncio.sleep(1)
+
+    if seat["reserved"] == True:
+        return False
+    return True
+
+
+async def select_seat():
     show_seats()
 
     while True:
@@ -52,8 +63,12 @@ def select_seat():
 
         for seat in seats:
             if seat["number"] == choice:
-                if seat["reserved"] == True:
+                canseat = await check_seats(seat)
+
+                if not canseat:
                     print("이미 예약 되었습니다.")
+                    return None
+
                 return seat
 
         print("존재하지 않는 좌석입니다.")
@@ -82,14 +97,14 @@ def calculate_price(base_price, seat, trip_type_number):
 reservations = []
 reservation_id = 1
 
-def create_reservation():
+async def create_reservation():
     global reservation_id
 
     print("\n===== 항공권 예약하기 =====")
 
     name = input("이름을 입력하세요. : ")
     destination, base_price = select_destination()
-    seat = select_seat()
+    seat = await select_seat()
     trip_type, trip_type_number = select_trip_type()
     price = calculate_price(base_price, seat["extra_price"], trip_type_number)
 
@@ -161,20 +176,22 @@ def delete_reservation():
             print("예약이 취소되었습니다.")
             return
 
-while True:
-    show_menu()
-    choice = int(input("메뉴 선택 : "))
+async def main():
+    while True:
+        show_menu()
+        choice = int(input("메뉴 선택 : "))
 
-    if choice == 1:
-        create_reservation()
-    elif choice == 2:
-        show_reservations()
-    elif choice == 3:
-        delete_reservation()
-    elif choice == 4:
-        print("\n프로그램을 종료합니다.")
-        break
-    else:
-        print("잘못된 입력입니다.")
+        if choice == 1:
+            await create_reservation()
+        elif choice == 2:
+            show_reservations()
+        elif choice == 3:
+            delete_reservation()
+        elif choice == 4:
+            print("\n프로그램을 종료합니다.")
+            break
+        else:
+            print("잘못된 입력입니다.")
 
+asyncio.run(main())
 
