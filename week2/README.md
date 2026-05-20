@@ -16,7 +16,8 @@
 ---
 **HTTP** 는 Request message와 Response message를 통해 요청, 응답을 처리합니다.   
 HTTP의 대표적인 클라이언트로는 브라우저가 있습니다. HTTP 요청과 응답을 통해서 브라우저와 서버는 구조화된 텍스트를 주고 받을 수 있습니다.   
-HTTP의 메세지는 크게 시작줄(Startline), 헤더(HTTP headers), 빈 줄(Empty line), 본문 (Body)로 구성되어 있습니다.    
+HTTP의 메세지는 크게 시작줄(Startline), 헤더(HTTP headers), 빈 줄(Empty line), 본문 (Body)로 구성되어 있습니다.
+
 ---
 **Startline**은 Request message일 때는 Request Method인 GET, POST, PUT, PATCH, DELETE와 Status Code로 구성됩니다.
 
