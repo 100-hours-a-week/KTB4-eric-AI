@@ -68,8 +68,11 @@ Status Code는 1xx ~ 5xx까지 있습니다.
 |대표 헤더|요청과 응답 메시지의 본문 데이터(representation)와 관련된 헤더로, 데이터의 형식, 언어, 압축 등을 나타내어 클라이언트가 데이터를 올바르게 해석하고 처리할 수 있도록 도와줍니다.|
 
 대표적인 요청 헤더로는 Host, User-Agent, Content-type, Accept 등이 있습니다.   
+
 응답 헤더로는 Content-type, Content-Length, Server 등이 있습니다.
+
 일반적인 헤더로는 Connection, Date 등이 있습니다.   
+
 대표 헤더로는 Content-Encoding, Content-Language, Content-Length 등이 있습니다.   
 
 이후 헤더와 바디를 구분하는 구분자인 **빈 줄(Blank line)** 이 있습니다.   
